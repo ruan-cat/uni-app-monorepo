@@ -1,21 +1,2 @@
-# 写星号配置 是为了让其他工具可以读取该配置，实现匹配
-# 一定要写成两个星号，否则会被 pnpm 识别为注释
-#
-# 出现故障 匹配范围过大 导致 .vercel 内的垃圾文件也被匹配到 被错误使用了。
 packages:
-  - "packages/*"
-  - "demos/*"
-  - "tests/*"
-  - "docs/*"
-  - "fork/*"
-  - "learn-create-compoents-lib/*"
-  # 配置系列的依赖包 为了实现便捷快速的配置分发
-  - "configs-package/*"
-
-catalog:
-  typescript: 5.7.3
-  lodash-es: 4.17.21
-  # vercel出现bug，安装 39.4.2 出现依赖冲突。多个项目内均出现该错误。
-  # 故在此考虑人工锁死版本号。
-  # vercel: 39.3.0
-  vercel: 41.2.0
+  - "apps/*"
