@@ -2,24 +2,29 @@
   <view class="uni-data-pickerview">
     <scroll-view v-if="!isCloudDataList" class="selected-area" scroll-x="true">
       <view class="selected-list">
-          <view 
-            class="selected-item"
-            v-for="(item,index) in selected"
-            :key="index"
-            :class="{
-              'selected-item-active':index == selectedIndex
-            }"
-            @click="handleSelect(index)"
-          >
-            <text>{{item.text || ''}}</text>
-          </view>
+        <view
+          class="selected-item"
+          v-for="(item, index) in selected"
+          :key="index"
+          :class="{
+            'selected-item-active': index == selectedIndex,
+          }"
+          @click="handleSelect(index)"
+        >
+          <text>{{ item.text || '' }}</text>
+        </view>
       </view>
     </scroll-view>
     <view class="tab-c">
       <scroll-view class="list" :scroll-y="true">
-        <view class="item" :class="{'is-disabled': !!item.disable}" v-for="(item, j) in dataList[selectedIndex]" :key="j"
-          @click="handleNodeClick(item, selectedIndex, j)">
-          <text class="item-text">{{item[map.text]}}</text>
+        <view
+          class="item"
+          :class="{ 'is-disabled': !!item.disable }"
+          v-for="(item, j) in dataList[selectedIndex]"
+          :key="j"
+          @click="handleNodeClick(item, selectedIndex, j)"
+        >
+          <text class="item-text">{{ item[map.text] }}</text>
           <view class="check" v-if="selected.length > selectedIndex && item[map.value] == selected[selectedIndex].value"></view>
         </view>
       </scroll-view>
@@ -28,14 +33,14 @@
         <uni-load-more class="load-more" :contentText="loadMore" status="loading"></uni-load-more>
       </view>
       <view class="error-message" v-if="errorMessage">
-        <text class="error-text">{{errorMessage}}</text>
+        <text class="error-text">{{ errorMessage }}</text>
       </view>
     </view>
   </view>
 </template>
 
 <script>
-  import dataPicker from "./uni-data-picker.js"
+  import dataPicker from './uni-data-picker.js';
 
   /**
    * DataPickerview
@@ -59,18 +64,18 @@
     props: {
       managedMode: {
         type: Boolean,
-        default: false
+        default: false,
       },
       ellipsis: {
         type: Boolean,
-        default: true
-      }
+        default: true,
+      },
     },
     created() {
       if (!this.managedMode) {
         this.$nextTick(() => {
           this.loadData();
-        })
+        });
       }
     },
     methods: {
@@ -79,7 +84,7 @@
         this.selectedIndex = 0;
         this.$nextTick(() => {
           this.loadData();
-        })
+        });
       },
       handleSelect(index) {
         this.selectedIndex = index;
@@ -94,57 +99,57 @@
         const value = node[this.map.value];
 
         if (i < this.selected.length - 1) {
-          this.selected.splice(i, this.selected.length - i)
+          this.selected.splice(i, this.selected.length - i);
           this.selected.push({
             text,
-            value
-          })
+            value,
+          });
         } else if (i === this.selected.length - 1) {
           this.selected.splice(i, 1, {
             text,
-            value
-          })
+            value,
+          });
         }
 
         if (node.isleaf) {
-          this.onSelectedChange(node, node.isleaf)
-          return
+          this.onSelectedChange(node, node.isleaf);
+          return;
         }
 
-        const {
-          isleaf,
-          hasNodes
-        } = this._updateBindData()
+        const { isleaf, hasNodes } = this._updateBindData();
 
         // 本地数据
         if (this.isLocalData) {
-          this.onSelectedChange(node, (!hasNodes || isleaf))
-        } else if (this.isCloudDataList) { // Cloud 数据 (单列)
-          this.onSelectedChange(node, true)
-        } else if (this.isCloudDataTree) { // Cloud 数据 (树形)
+          this.onSelectedChange(node, !hasNodes || isleaf);
+        } else if (this.isCloudDataList) {
+          // Cloud 数据 (单列)
+          this.onSelectedChange(node, true);
+        } else if (this.isCloudDataTree) {
+          // Cloud 数据 (树形)
           if (isleaf) {
-            this.onSelectedChange(node, node.isleaf)
-          } else if (!hasNodes) { // 请求一次服务器以确定是否为叶子节点
+            this.onSelectedChange(node, node.isleaf);
+          } else if (!hasNodes) {
+            // 请求一次服务器以确定是否为叶子节点
             this.loadCloudDataNode((data) => {
               if (!data.length) {
-                node.isleaf = true
+                node.isleaf = true;
               } else {
-                this._treeData.push(...data)
-                this._updateBindData(node)
+                this._treeData.push(...data);
+                this._updateBindData(node);
               }
-              this.onSelectedChange(node, node.isleaf)
-            })
+              this.onSelectedChange(node, node.isleaf);
+            });
           }
         }
       },
       updateData(data) {
-        this._treeData = data.treeData
-        this.selected = data.selected
+        this._treeData = data.treeData;
+        this.selected = data.selected;
         if (!this._treeData.length) {
-          this.loadData()
+          this.loadData();
         } else {
           //this.selected = data.selected
-          this._updateBindData()
+          this._updateBindData();
         }
       },
       onDataChange() {
@@ -152,35 +157,35 @@
       },
       onSelectedChange(node, isleaf) {
         if (isleaf) {
-          this._dispatchEvent()
+          this._dispatchEvent();
         }
 
         if (node) {
-          this.$emit('nodeclick', node)
+          this.$emit('nodeclick', node);
         }
       },
       _dispatchEvent() {
-        this.$emit('change', this.selected.slice(0))
-      }
-    }
-  }
+        this.$emit('change', this.selected.slice(0));
+      },
+    },
+  };
 </script>
 
 <style lang="scss">
-	$uni-primary: #007aff !default;
+  $uni-primary: #007aff !default;
 
-	.uni-data-pickerview {
-		flex: 1;
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex-direction: column;
-		overflow: hidden;
-		height: 100%;
-	}
+  .uni-data-pickerview {
+    flex: 1;
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+  }
 
   .error-text {
-    color: #DD524D;
+    color: #dd524d;
   }
 
   .loading-cover {
@@ -189,7 +194,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(255, 255, 255, 0.5);
     /* #ifndef APP-NVUE */
     display: flex;
     /* #endif */
@@ -212,7 +217,7 @@
     right: 0;
     bottom: 0;
     padding: 15px;
-    opacity: .9;
+    opacity: 0.9;
     z-index: 102;
   }
 
@@ -254,13 +259,13 @@
     /* #endif */
   }
 
-	.selected-item-active {
-		border-bottom: 2px solid $uni-primary;
-	}
+  .selected-item-active {
+    border-bottom: 2px solid $uni-primary;
+  }
 
-	.selected-item-text {
-		color: $uni-primary;
-	}
+  .selected-item-text {
+    color: $uni-primary;
+  }
 
   .tab-c {
     position: relative;
@@ -287,7 +292,7 @@
   }
 
   .is-disabled {
-    opacity: .5;
+    opacity: 0.5;
   }
 
   .item-text {
@@ -307,17 +312,17 @@
     /* #endif */
   }
 
-	.check {
-		margin-right: 5px;
-		border: 2px solid $uni-primary;
-		border-left: 0;
-		border-top: 0;
-		height: 12px;
-		width: 6px;
-		transform-origin: center;
-		/* #ifndef APP-NVUE */
-		transition: all 0.3s;
-		/* #endif */
-		transform: rotate(45deg);
-	}
+  .check {
+    margin-right: 5px;
+    border: 2px solid $uni-primary;
+    border-left: 0;
+    border-top: 0;
+    height: 12px;
+    width: 6px;
+    transform-origin: center;
+    /* #ifndef APP-NVUE */
+    transition: all 0.3s;
+    /* #endif */
+    transform: rotate(45deg);
+  }
 </style>

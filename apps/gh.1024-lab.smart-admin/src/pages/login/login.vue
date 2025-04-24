@@ -30,7 +30,7 @@
           v-model="loginForm.emailCode"
         />
         <button @click="sendSmsCode" class="code-btn" :disabled="emailCodeButtonDisabled">
-              {{ emailCodeTips }}
+          {{ emailCodeTips }}
         </button>
       </view>
 
@@ -203,19 +203,19 @@
   }
   // 发送邮箱验证码
   async function sendSmsCode() {
-  try {
-    uni.showLoading();
-    let result = await loginApi.sendLoginEmailCode(loginForm.loginName);
-    message.success('验证码发送成功!请登录邮箱查看验证码~');
-    runCountDown();
-  } catch (e) {
-    smartSentry.captureError(e);
-  } finally {
-    uni.hideLoading();
+    try {
+      uni.showLoading();
+      let result = await loginApi.sendLoginEmailCode(loginForm.loginName);
+      message.success('验证码发送成功!请登录邮箱查看验证码~');
+      runCountDown();
+    } catch (e) {
+      smartSentry.captureError(e);
+    } finally {
+      uni.hideLoading();
+    }
   }
-  }
-  onShow(()=>{
-    getCaptcha()
+  onShow(() => {
+    getCaptcha();
     getTwoFactorLoginFlag();
   });
 </script>
@@ -356,7 +356,7 @@
     margin-bottom: 120rpx;
     align-self: flex-start;
   }
-  .code-btn{
+  .code-btn {
     width: 240rpx;
     font-size: 24rpx;
     margin-right: 20rpx;

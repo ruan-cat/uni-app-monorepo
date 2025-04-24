@@ -9,11 +9,10 @@
     "翻页分页",
     "wxs",
     "setup"
-],
+  ],
   "repository": "https://github.com/mescroll/mescroll",
-"engines": {
-  },
-"dcloudext": {
+  "engines": {},
+  "dcloudext": {
     "sale": {
       "regular": {
         "price": "0.00"

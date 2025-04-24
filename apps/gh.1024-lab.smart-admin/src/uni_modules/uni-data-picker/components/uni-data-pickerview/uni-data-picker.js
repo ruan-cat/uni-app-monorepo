@@ -2,105 +2,105 @@ export default {
   props: {
     localdata: {
       type: [Array, Object],
-      default () {
-        return []
-      }
+      default() {
+        return [];
+      },
     },
     spaceInfo: {
       type: Object,
-      default () {
-        return {}
-      }
+      default() {
+        return {};
+      },
     },
     collection: {
       type: String,
-      default: ''
+      default: '',
     },
     action: {
       type: String,
-      default: ''
+      default: '',
     },
     field: {
       type: String,
-      default: ''
+      default: '',
     },
     orderby: {
       type: String,
-      default: ''
+      default: '',
     },
     where: {
       type: [String, Object],
-      default: ''
+      default: '',
     },
     pageData: {
       type: String,
-      default: 'add'
+      default: 'add',
     },
     pageCurrent: {
       type: Number,
-      default: 1
+      default: 1,
     },
     pageSize: {
       type: Number,
-      default: 500
+      default: 500,
     },
     getcount: {
       type: [Boolean, String],
-      default: false
+      default: false,
     },
     getone: {
       type: [Boolean, String],
-      default: false
+      default: false,
     },
     gettree: {
       type: [Boolean, String],
-      default: false
+      default: false,
     },
     manual: {
       type: Boolean,
-      default: false
+      default: false,
     },
     value: {
       type: [Array, String, Number],
-      default () {
-        return []
-      }
+      default() {
+        return [];
+      },
     },
     modelValue: {
       type: [Array, String, Number],
-      default () {
-        return []
-      }
+      default() {
+        return [];
+      },
     },
     preload: {
       type: Boolean,
-      default: false
+      default: false,
     },
     stepSearh: {
       type: Boolean,
-      default: true
+      default: true,
     },
     selfField: {
       type: String,
-      default: ''
+      default: '',
     },
     parentField: {
       type: String,
-      default: ''
+      default: '',
     },
     multiple: {
       type: Boolean,
-      default: false
+      default: false,
     },
     map: {
       type: Object,
-      default () {
+      default() {
         return {
-          text: "text",
-          value: "value"
-        }
-      }
-    }
+          text: 'text',
+          value: 'value',
+        };
+      },
+    },
   },
   data() {
     return {
@@ -109,7 +109,7 @@ export default {
       loadMore: {
         contentdown: '',
         contentrefresh: '',
-        contentnomore: ''
+        contentnomore: '',
       },
       dataList: [],
       selected: [],
@@ -117,9 +117,9 @@ export default {
       page: {
         current: this.pageCurrent,
         size: this.pageSize,
-        count: 0
-      }
-    }
+        count: 0,
+      },
+    };
   },
   computed: {
     isLocalData() {
@@ -129,60 +129,63 @@ export default {
       return this.collection.length > 0;
     },
     isCloudDataList() {
-      return (this.isCloudData && (!this.parentField && !this.selfField));
+      return this.isCloudData && !this.parentField && !this.selfField;
     },
     isCloudDataTree() {
-      return (this.isCloudData && this.parentField && this.selfField);
+      return this.isCloudData && this.parentField && this.selfField;
     },
     dataValue() {
-      let isModelValue = Array.isArray(this.modelValue) ? (this.modelValue.length > 0) : (this.modelValue !== null ||
-        this.modelValue !== undefined);
+      let isModelValue = Array.isArray(this.modelValue) ? this.modelValue.length > 0 : this.modelValue !== null || this.modelValue !== undefined;
       return isModelValue ? this.modelValue : this.value;
     },
     hasValue() {
       if (typeof this.dataValue === 'number') {
-        return true
+        return true;
       }
-      return (this.dataValue != null) && (this.dataValue.length > 0)
-    }
+      return this.dataValue != null && this.dataValue.length > 0;
+    },
   },
   created() {
-    this.$watch(() => {
-      var al = [];
-      ['pageCurrent',
-        'pageSize',
-        'spaceInfo',
-        'value',
-        'modelValue',
-        'localdata',
-        'collection',
-        'action',
-        'field',
-        'orderby',
-        'where',
-        'getont',
-        'getcount',
-        'gettree'
-      ].forEach(key => {
-        al.push(this[key])
-      });
-      return al
-    }, (newValue, oldValue) => {
-      let needReset = false
-      for (let i = 2; i < newValue.length; i++) {
-        if (newValue[i] != oldValue[i]) {
-          needReset = true
-          break
+    this.$watch(
+      () => {
+        var al = [];
+        [
+          'pageCurrent',
+          'pageSize',
+          'spaceInfo',
+          'value',
+          'modelValue',
+          'localdata',
+          'collection',
+          'action',
+          'field',
+          'orderby',
+          'where',
+          'getont',
+          'getcount',
+          'gettree',
+        ].forEach((key) => {
+          al.push(this[key]);
+        });
+        return al;
+      },
+      (newValue, oldValue) => {
+        let needReset = false;
+        for (let i = 2; i < newValue.length; i++) {
+          if (newValue[i] != oldValue[i]) {
+            needReset = true;
+            break;
+          }
         }
-      }
-      if (newValue[0] != oldValue[0]) {
-        this.page.current = this.pageCurrent
-      }
-      this.page.size = this.pageSize
+        if (newValue[0] != oldValue[0]) {
+          this.page.current = this.pageCurrent;
+        }
+        this.page.size = this.pageSize;
 
-      this.onPropsChange()
-    })
-    this._treeData = []
+        this.onPropsChange();
+      }
+    );
+    this._treeData = [];
   },
   methods: {
     onPropsChange() {
@@ -254,7 +257,7 @@ export default {
       try {
         let commandOptions = {
           field: this._cloudDataPostField(),
-          where: this._cloudDataTreeWhere()
+          where: this._cloudDataTreeWhere(),
         };
         if (this.gettree) {
           commandOptions.startwith = `${this.selfField}=='${this.dataValue}'`;
@@ -285,7 +288,7 @@ export default {
       try {
         let commandOptions = {
           field: this._cloudDataPostField(),
-          where: this._cloudDataNodeWhere()
+          where: this._cloudDataNodeWhere(),
         };
 
         let response = await this.getCommand(commandOptions);
@@ -316,18 +319,18 @@ export default {
       let where = [];
       let whereField = this._getForeignKeyByField();
       if (whereField) {
-        where.push(`${whereField} == '${this.dataValue}'`)
+        where.push(`${whereField} == '${this.dataValue}'`);
       }
 
       where = where.join(' || ');
 
       if (this.where) {
-        where = `(${this.where}) && (${where})`
+        where = `(${this.where}) && (${where})`;
       }
 
       return this.getCommand({
         field: this._cloudDataPostField(),
-        where
+        where,
       }).then((res) => {
         this.selected = res.result.data;
         return res.result.data;
@@ -339,8 +342,8 @@ export default {
       return this.getCommand({
         field: this._cloudDataPostField(),
         getTreePath: {
-          startWith: `${this.selfField}=='${this.dataValue}'`
-        }
+          startWith: `${this.selfField}=='${this.dataValue}'`,
+        },
       }).then((res) => {
         let treePath = [];
         this._extractTreePath(res.result.data, treePath);
@@ -351,47 +354,50 @@ export default {
 
     getCommand(options = {}) {
       /* eslint-disable no-undef */
-      let db = uniCloud.database(this.spaceInfo)
+      let db = uniCloud.database(this.spaceInfo);
 
-      const action = options.action || this.action
+      const action = options.action || this.action;
       if (action) {
-        db = db.action(action)
+        db = db.action(action);
       }
 
-      const collection = options.collection || this.collection
-      db = db.collection(collection)
+      const collection = options.collection || this.collection;
+      db = db.collection(collection);
 
-      const where = options.where || this.where
+      const where = options.where || this.where;
       if (!(!where || !Object.keys(where).length)) {
-        db = db.where(where)
+        db = db.where(where);
       }
 
-      const field = options.field || this.field
+      const field = options.field || this.field;
       if (field) {
-        db = db.field(field)
+        db = db.field(field);
       }
 
-      const orderby = options.orderby || this.orderby
+      const orderby = options.orderby || this.orderby;
       if (orderby) {
-        db = db.orderBy(orderby)
+        db = db.orderBy(orderby);
       }
 
-      const current = options.pageCurrent !== undefined ? options.pageCurrent : this.page.current
-      const size = options.pageSize !== undefined ? options.pageSize : this.page.size
-      const getCount = options.getcount !== undefined ? options.getcount : this.getcount
-      const getTree = options.gettree !== undefined ? options.gettree : this.gettree
+      const current = options.pageCurrent !== undefined ? options.pageCurrent : this.page.current;
+      const size = options.pageSize !== undefined ? options.pageSize : this.page.size;
+      const getCount = options.getcount !== undefined ? options.getcount : this.getcount;
+      const getTree = options.gettree !== undefined ? options.gettree : this.gettree;
 
       const getOptions = {
         getCount,
-        getTree
-      }
+        getTree,
+      };
       if (options.getTreePath) {
-        getOptions.getTreePath = options.getTreePath
+        getOptions.getTreePath = options.getTreePath;
       }
 
-      db = db.skip(size * (current - 1)).limit(size).get(getOptions)
+      db = db
+        .skip(size * (current - 1))
+        .limit(size)
+        .get(getOptions);
 
-      return db
+      return db;
     },
 
     _cloudDataPostField() {
@@ -403,32 +409,32 @@ export default {
     },
 
     _cloudDataTreeWhere() {
-      let result = []
-      let selected = this.selected
-      let parentField = this.parentField
+      let result = [];
+      let selected = this.selected;
+      let parentField = this.parentField;
       if (parentField) {
-        result.push(`${parentField} == null || ${parentField} == ""`)
+        result.push(`${parentField} == null || ${parentField} == ""`);
       }
       if (selected.length) {
         for (var i = 0; i < selected.length - 1; i++) {
-          result.push(`${parentField} == '${selected[i].value}'`)
+          result.push(`${parentField} == '${selected[i].value}'`);
         }
       }
 
-      let where = []
+      let where = [];
       if (this.where) {
-        where.push(`(${this.where})`)
+        where.push(`(${this.where})`);
       }
 
       if (result.length) {
-        where.push(`(${result.join(' || ')})`)
+        where.push(`(${result.join(' || ')})`);
       }
 
-      return where.join(' && ')
+      return where.join(' && ');
     },
 
     _cloudDataNodeWhere() {
-      let where = []
+      let where = [];
       let selected = this.selected;
       if (selected.length) {
         where.push(`${this.parentField} == '${selected[selected.length - 1].value}'`);
@@ -437,24 +443,24 @@ export default {
       where = where.join(' || ');
 
       if (this.where) {
-        return `(${this.where}) && (${where})`
+        return `(${this.where}) && (${where})`;
       }
 
-      return where
+      return where;
     },
 
     _getWhereByForeignKey() {
-      let result = []
+      let result = [];
       let whereField = this._getForeignKeyByField();
       if (whereField) {
-        result.push(`${whereField} == '${this.dataValue}'`)
+        result.push(`${whereField} == '${this.dataValue}'`);
       }
 
       if (this.where) {
-        return `(${this.where}) && (${result.join(' || ')})`
+        return `(${this.where}) && (${result.join(' || ')})`;
       }
 
-      return result.join(' || ')
+      return result.join(' || ');
     },
 
     _getForeignKeyByField() {
@@ -474,149 +480,148 @@ export default {
     },
 
     _updateBindData(node) {
-      const {
-        dataList,
-        hasNodes
-      } = this._filterData(this._treeData, this.selected)
+      const { dataList, hasNodes } = this._filterData(this._treeData, this.selected);
 
-      let isleaf = this._stepSearh === false && !hasNodes
+      let isleaf = this._stepSearh === false && !hasNodes;
 
       if (node) {
-        node.isleaf = isleaf
+        node.isleaf = isleaf;
       }
 
-      this.dataList = dataList
-      this.selectedIndex = dataList.length - 1
+      this.dataList = dataList;
+      this.selectedIndex = dataList.length - 1;
 
       if (!isleaf && this.selected.length < dataList.length) {
         this.selected.push({
           value: null,
-          text: "请选择"
-        })
+          text: '请选择',
+        });
       }
 
       return {
         isleaf,
-        hasNodes
-      }
+        hasNodes,
+      };
     },
 
     _updateSelected() {
-      let dl = this.dataList
-      let sl = this.selected
-      let textField = this.map.text
-      let valueField = this.map.value
+      let dl = this.dataList;
+      let sl = this.selected;
+      let textField = this.map.text;
+      let valueField = this.map.value;
       for (let i = 0; i < sl.length; i++) {
-        let value = sl[i].value
-        let dl2 = dl[i]
+        let value = sl[i].value;
+        let dl2 = dl[i];
         for (let j = 0; j < dl2.length; j++) {
-          let item2 = dl2[j]
+          let item2 = dl2[j];
           if (item2[valueField] === value) {
-            sl[i].text = item2[textField]
-            break
+            sl[i].text = item2[textField];
+            break;
           }
         }
       }
     },
 
     _filterData(data, paths) {
-      let dataList = []
-      let hasNodes = true
+      let dataList = [];
+      let hasNodes = true;
 
-      dataList.push(data.filter((item) => {
-        return (item.parent_value === null || item.parent_value === undefined || item.parent_value === '')
-      }))
-      for (let i = 0; i < paths.length; i++) {
-        let value = paths[i].value
-        let nodes = data.filter((item) => {
-          return item.parent_value === value
+      dataList.push(
+        data.filter((item) => {
+          return item.parent_value === null || item.parent_value === undefined || item.parent_value === '';
         })
+      );
+      for (let i = 0; i < paths.length; i++) {
+        let value = paths[i].value;
+        let nodes = data.filter((item) => {
+          return item.parent_value === value;
+        });
 
         if (nodes.length) {
-          dataList.push(nodes)
+          dataList.push(nodes);
         } else {
-          hasNodes = false
+          hasNodes = false;
         }
       }
 
       return {
         dataList,
-        hasNodes
-      }
+        hasNodes,
+      };
     },
 
     _extractTree(nodes, result, parent_value) {
-      let list = result || []
-      let valueField = this.map.value
+      let list = result || [];
+      let valueField = this.map.value;
       for (let i = 0; i < nodes.length; i++) {
-        let node = nodes[i]
+        let node = nodes[i];
 
-        let child = {}
+        let child = {};
         for (let key in node) {
           if (key !== 'children') {
-            child[key] = node[key]
+            child[key] = node[key];
           }
         }
         if (parent_value !== null && parent_value !== undefined && parent_value !== '') {
-          child.parent_value = parent_value
+          child.parent_value = parent_value;
         }
-        result.push(child)
+        result.push(child);
 
-        let children = node.children
+        let children = node.children;
         if (children) {
-          this._extractTree(children, result, node[valueField])
+          this._extractTree(children, result, node[valueField]);
         }
       }
     },
 
     _extractTreePath(nodes, result) {
-      let list = result || []
+      let list = result || [];
       for (let i = 0; i < nodes.length; i++) {
-        let node = nodes[i]
+        let node = nodes[i];
 
-        let child = {}
+        let child = {};
         for (let key in node) {
           if (key !== 'children') {
-            child[key] = node[key]
+            child[key] = node[key];
           }
         }
-        result.push(child)
+        result.push(child);
 
-        let children = node.children
+        let children = node.children;
         if (children) {
-          this._extractTreePath(children, result)
+          this._extractTreePath(children, result);
         }
       }
     },
 
     _findNodePath(key, nodes, path = []) {
-      let textField = this.map.text
-      let valueField = this.map.value
+      let textField = this.map.text;
+      let valueField = this.map.value;
       for (let i = 0; i < nodes.length; i++) {
-        let node = nodes[i]
-        let children = node.children
-        let text = node[textField]
-        let value = node[valueField]
+        let node = nodes[i];
+        let children = node.children;
+        let text = node[textField];
+        let value = node[valueField];
 
         path.push({
           value,
-          text
-        })
+          text,
+        });
 
         if (value === key) {
-          return path
+          return path;
         }
 
         if (children) {
-          const p = this._findNodePath(key, children, path)
+          const p = this._findNodePath(key, children, path);
           if (p.length) {
-            return p
+            return p;
           }
         }
 
-        path.pop()
+        path.pop();
       }
-      return []
-    }
-  }
-}
+      return [];
+    },
+  },
+};

@@ -360,7 +360,8 @@
       // 标签栏占位元素样式
       placeholderStyle() {
         if (!this.isFixed) return {};
-        if (!this.isVertical) return { height: this.scrollViewRect?.height + 'px' }; //标签栏水平展示时设置占位元素高度
+        if (!this.isVertical)
+          return { height: this.scrollViewRect?.height + 'px' }; //标签栏水平展示时设置占位元素高度
         else return { width: this.scrollViewRect?.width + 'px' }; //标签栏垂直展示时设置占位元素宽度
       },
       // 滑块透明度

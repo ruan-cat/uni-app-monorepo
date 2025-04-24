@@ -1,16 +1,14 @@
 import { resolve } from 'path';
-import { defineConfig } from 'vite'
-import uni from '@dcloudio/vite-plugin-uni'
+import { defineConfig } from 'vite';
+import uni from '@dcloudio/vite-plugin-uni';
 
 const pathResolve = (dir) => {
   return resolve(__dirname, '.', dir);
 };
 
 export default defineConfig({
-  transpileDependencies:['@dcloudio/uni-ui'],
-  plugins: [
-    uni(),
-  ],
+  transpileDependencies: ['@dcloudio/uni-ui'],
+  plugins: [uni()],
   root: process.cwd(),
   resolve: {
     alias: [
@@ -34,4 +32,4 @@ export default defineConfig({
       },
     },
   },
-})
+});

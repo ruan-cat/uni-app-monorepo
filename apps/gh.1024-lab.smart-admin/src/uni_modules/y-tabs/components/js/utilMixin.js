@@ -1,8 +1,5 @@
-
-export const utilMixin = function() {
-	return {
-		methods: {
-			 
-		},
-	}
-}
+export const utilMixin = function () {
+  return {
+    methods: {},
+  };
+};

@@ -21,12 +21,11 @@ function object2string(data) {
  */
 function stringToHex(str) {
   let hex = '';
-  for(let i = 0; i < str.length; i++) {
+  for (let i = 0; i < str.length; i++) {
     hex += str.charCodeAt(i).toString(16).padStart(2, '0');
   }
   return hex;
 }
-
 
 /*
  * -------------------- ※ AES 加密、解密 begin ※ --------------------
@@ -96,8 +95,6 @@ const SM4 = {
     return CryptoSM.sm4.decrypt(decode64Str, stringToHex(SM4_KEY));
   },
 };
-
-
 
 // -----------------------  对外暴露： 加密、解密 -----------------------
 

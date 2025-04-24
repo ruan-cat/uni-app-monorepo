@@ -10,14 +10,14 @@
               {{ $smartEnumPlugin.getDescByValue('MESSAGE_TYPE_ENUM', item.messageType) }}
             </view>
           </view>
-          <view class="header-time"> {{item.createTime}} </view>
+          <view class="header-time"> {{ item.createTime }} </view>
         </view>
         <view class="content">
           <view class="message-title">
             <uni-icons v-if="!item.readFlag" color="red" class="smart-margin-right10" type="info-filled" :size="14"></uni-icons>
             {{ item.title }}
           </view>
-          <view class="message-body"> {{item.content}} </view>
+          <view class="message-body"> {{ item.content }} </view>
         </view>
       </view>
     </mescroll-body>
@@ -60,7 +60,7 @@
   async function query(mescroll, isDownFlag, param) {
     try {
       let res = await messageApi.queryMessage(param);
-      res.data.list.map(e => e.content = e.content.substr(0,50));
+      res.data.list.map((e) => (e.content = e.content.substr(0, 50)));
       if (!isDownFlag) {
         messageListData.value = messageListData.value.concat(res.data.list);
       } else {

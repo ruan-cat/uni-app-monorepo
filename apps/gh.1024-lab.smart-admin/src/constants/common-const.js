@@ -53,7 +53,6 @@ export const USER_TYPE_ENUM = {
     value: 1,
     desc: '员工',
   },
-  
 };
 
 export const DATA_TYPE_ENUM = {
@@ -65,6 +64,4 @@ export const DATA_TYPE_ENUM = {
     value: 10,
     desc: '加密',
   },
-  
 };
-

@@ -75,57 +75,54 @@ $uni-font-size-subtitle: 18px;
 $uni-color-paragraph: #3f536e; // 文章段落颜色
 $uni-font-size-paragraph: 15px;
 
-
-
 // 字体 -------------------  begin -------------
 $main-size: 14px; // 主要字体大小
-$title-size: 17px;// 标题字体大小
+$title-size: 17px; // 标题字体大小
 $small-size: 12px; // 辅助字体大小
 // 字体 -------------------  end -------------
 
 // 颜色 -------------------  begin -------------
-$main-color: #1A9AFF; //主色调
-$main-background: #F4F4F4; //主色背景色
-$main-font-color: #444444;// 字体一级颜色
+$main-color: #1a9aff; //主色调
+$main-background: #f4f4f4; //主色背景色
+$main-font-color: #444444; // 字体一级颜色
 $second-font-color: #777777; // 字体二级颜色
-$border-color: #EDEDED; // 边框颜色
-$background-color: #F5F6F8; // 背景颜色
-$page-bg-color: #F7F8F9;  // 页面背景灰色
-$title-text-color: #444444;// 列表顶部标题颜色
+$border-color: #ededed; // 边框颜色
+$background-color: #f5f6f8; // 背景颜色
+$page-bg-color: #f7f8f9; // 页面背景灰色
+$title-text-color: #444444; // 列表顶部标题颜色
 $item-text-color: #353535; // 块标题颜色
-$main-orange-color: #FF6C00; // 橙色
-$main-orange-background: #FFF0ED;// 橙色背景
-$main-green-color: #1CE36D; // 绿色
-$main-green-background: #E5F8E9;// 绿色背景
-$main-red-color: #FF3924; // 红色
-$auxiliary-color: #CCCCCC; // 辅助颜色
+$main-orange-color: #ff6c00; // 橙色
+$main-orange-background: #fff0ed; // 橙色背景
+$main-green-color: #1ce36d; // 绿色
+$main-green-background: #e5f8e9; // 绿色背景
+$main-red-color: #ff3924; // 红色
+$auxiliary-color: #cccccc; // 辅助颜色
 
-$toast-color: #A1AEBE; // 提示颜色
-$toast-color-low: #D0D5DB; // 弱提示颜色
-$weak-background-color: #F9FAFC; // 弱的颜色
-$gray-color-low: #CCC; // 浅灰色
-$linear-color: linear-gradient(270deg,#2e9aff, #007ff2); // 主要渐变色
-$error-color: #F26158; // 错误颜色
+$toast-color: #a1aebe; // 提示颜色
+$toast-color-low: #d0d5db; // 弱提示颜色
+$weak-background-color: #f9fafc; // 弱的颜色
+$gray-color-low: #ccc; // 浅灰色
+$linear-color: linear-gradient(270deg, #2e9aff, #007ff2); // 主要渐变色
+$error-color: #f26158; // 错误颜色
 $answer-error-bg-color: #fffaf9; // 做题选项答错背景
 $answer-right-bg-color: #f6fbff; // 做题选项答对背景
-$collapse-bg-color: #F3F6FB; // 折叠面板二级背景颜色
+$collapse-bg-color: #f3f6fb; // 折叠面板二级背景颜色
 // 颜色 -------------------  end -------------
-
 
 // 样式 -------------------  begin -------------
 // 这里导出的样式在APP端无效，APP端不要再引用了
 :export {
   mainColor: $main-color;
-  backgroundColor:$background-color;
+  backgroundColor: $background-color;
   error: $error-color;
   mainFontColor: $main-font-color;
   auxiliaryFontColor: $auxiliary-color;
   mainBorder: $border-color;
-  secondFontColor:$second-font-color;
-  collapseBgColor:$collapse-bg-color;
-  toastColor:$toast-color;
-  textColorWhite:$main-background;
+  secondFontColor: $second-font-color;
+  collapseBgColor: $collapse-bg-color;
+  toastColor: $toast-color;
+  textColorWhite: $main-background;
   toastColorLow: $toast-color-low;
   titleTextColor: $title-text-color;
-  grayColorLow:$gray-color-low;
+  grayColorLow: $gray-color-low;
 }
