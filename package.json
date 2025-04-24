@@ -39,6 +39,7 @@
 		"eslint-config-prettier": "^10.1.2",
 		"eslint-plugin-prettier": "^5.2.6",
 		"prettier": "^3.5.3",
-		"prettier-plugin-lint-md": "^1.0.1"
+		"prettier-plugin-lint-md": "^1.0.1",
+		"tsx": "^4.19.3"
 	}
 }
