@@ -1,0 +1,37 @@
+{
+	"name": "@ruan-cat-uniapp-monorepo/root",
+	"private": true,
+	"version": "1.0.0",
+	"author": "ruan-cat",
+	"license": "ISC",
+	"description": "学习uniapp的monorepo，本仓库会集中大量的uniapp模板。用于快速部署模板的项目，并熟悉uniapp的开发。",
+	"type": "module",
+	"packageManager": "pnpm@9.15.0",
+	"engines": {
+		"node": ">=22.14.0"
+	},
+	"scripts": {
+		"build": "turbo build",
+		"on-github-action-flow": "pnpm run build && pnpm run build:docs",
+		"git:push": "git push --follow-tags",
+		"build:docs": "turbo build:docs",
+		"clear": "node --import=tsx ./scripts/clean.ts",
+		"git:dev-2-main": "git rebase dev main && pnpm run git:push",
+		"git:main-2-dev": "git rebase main dev",
+		"test": "vitest --ui --watch --api.port=4000",
+		"format": "prettier --write . --ignore-path ./.config/.prettierignore --ignore-path .gitignore",
+		"create-code-workspace:": "node --import=tsx ./scripts/generate.code-workspace.ts",
+		"deploy-vercel": "node --import=tsx ./scripts/vercel-deploy-tool.ts",
+		"preinstall": "npm run corepack:pnpm",
+		"corepack:pnpm": "corepack enable && corepack install",
+		"git:fetch": "git fetch -p",
+		"clear:deps": "rimraf -g **/{node_modules,package-lock.json,pnpm-lock.yaml}",
+		"clear:cache": "rimraf -g **/{dist,.turbo,.vercel,.cache,.temp}"
+	},
+	"devDependencies": {
+		"@ruan-cat/commitlint-config": "^1.0.5",
+		"@ruan-cat/generate-code-workspace": "^0.3.18",
+		"commitizen": "^4.3.1",
+		"cz-git": "^1.11.1"
+	}
+}
