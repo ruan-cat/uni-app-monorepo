@@ -29,9 +29,16 @@
 		"clear:cache": "rimraf -g **/{dist,.turbo,.vercel,.cache,.temp}"
 	},
 	"devDependencies": {
+		"@antfu/eslint-config": "^4.12.0",
 		"@ruan-cat/commitlint-config": "^1.0.5",
 		"@ruan-cat/generate-code-workspace": "^0.3.18",
+		"@types/eslint-config-prettier": "^6.11.3",
 		"commitizen": "^4.3.1",
-		"cz-git": "^1.11.1"
+		"cz-git": "^1.11.1",
+		"eslint": "^9.25.1",
+		"eslint-config-prettier": "^10.1.2",
+		"eslint-plugin-prettier": "^5.2.6",
+		"prettier": "^3.5.3",
+		"prettier-plugin-lint-md": "^1.0.1"
 	}
 }
