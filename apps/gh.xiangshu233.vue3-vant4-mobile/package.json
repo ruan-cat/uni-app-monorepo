@@ -1,5 +1,6 @@
 {
-  "name": "vue3-vant4-mobile",
+  "name": "@ruan-cat-uniapp/gh.xiangshu233.vue3-vant4-mobile",
+  "description": "vue3-vant4-mobile https://github.com/xiangshu233/vue3-vant4-mobile",
   "type": "module",
   "version": "2.1.0",
   "private": true,
