@@ -1,3 +1,11 @@
+## 个人整体评价
+
+本项目并不是传统的 uniapp 项目，并不能完成跨端开发的任务。
+
+本项目重点侧重于现代前端技术的移动端使用。如果仅仅是为了开发 H5 端的移动端样式，用本模板效果是很好的。
+
+比如说移动端外部嵌入的活动页，比如小游戏抽奖页面。本模板是很合适的。
+
 <div align="center">
   <a href="https://github.com/xiangshu233/vue3-vant4-mobile">
     <img alt="Vue3Vant4MobileLogo" width="200" height="200" src="https://fastly.jsdelivr.net/gh/xiangshu233/blogAssets/2022/07/logo.svg">
@@ -139,47 +147,47 @@
 
 ```jsonc
 {
-  // Enable the ESlint flat config support
-  "eslint.experimental.useFlatConfig": true,
+	// Enable the ESlint flat config support
+	"eslint.experimental.useFlatConfig": true,
 
-  // Disable the default formatter, use eslint instead
-  "prettier.enable": false,
-  "editor.formatOnSave": false,
+	// Disable the default formatter, use eslint instead
+	"prettier.enable": false,
+	"editor.formatOnSave": false,
 
-  // Auto fix
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "never"
-  },
+	// Auto fix
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit",
+		"source.organizeImports": "never",
+	},
 
-  // Silent the stylistic rules in you IDE, but still auto fix them
-  "eslint.rules.customizations": [
-    { "rule": "style/*", "severity": "off" },
-    { "rule": "format/*", "severity": "off" },
-    { "rule": "*-indent", "severity": "off" },
-    { "rule": "*-spacing", "severity": "off" },
-    { "rule": "*-spaces", "severity": "off" },
-    { "rule": "*-order", "severity": "off" },
-    { "rule": "*-dangle", "severity": "off" },
-    { "rule": "*-newline", "severity": "off" },
-    { "rule": "*quotes", "severity": "off" },
-    { "rule": "*semi", "severity": "off" }
-  ],
+	// Silent the stylistic rules in you IDE, but still auto fix them
+	"eslint.rules.customizations": [
+		{ "rule": "style/*", "severity": "off" },
+		{ "rule": "format/*", "severity": "off" },
+		{ "rule": "*-indent", "severity": "off" },
+		{ "rule": "*-spacing", "severity": "off" },
+		{ "rule": "*-spaces", "severity": "off" },
+		{ "rule": "*-order", "severity": "off" },
+		{ "rule": "*-dangle", "severity": "off" },
+		{ "rule": "*-newline", "severity": "off" },
+		{ "rule": "*quotes", "severity": "off" },
+		{ "rule": "*semi", "severity": "off" },
+	],
 
-  // Enable eslint for all supported languages
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue",
-    "html",
-    "markdown",
-    "json",
-    "jsonc",
-    "yaml",
-    "toml"
-  ]
+	// Enable eslint for all supported languages
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"vue",
+		"html",
+		"markdown",
+		"json",
+		"jsonc",
+		"yaml",
+		"toml",
+	],
 }
 ```
 
@@ -253,7 +261,7 @@ simple-git-hooks 和 husky 都是用于管理 Git 钩子（Git hooks）的工具
 
 > simple-git-hooks:
 >
-> - 简介: simple-git-hooks 是一个轻量级的工具，用于管理和运行Git钩子。
+> - 简介: simple-git-hooks 是一个轻量级的工具，用于管理和运行 Git 钩子。
 > - 特点:
 >   - 提供了简单的配置方式来定义和运行 Gi 钩子。
 >   - 适合于小型项目或对 Git 钩子需求不复杂的项目。
@@ -266,22 +274,22 @@ simple-git-hooks 和 husky 都是用于管理 Git 钩子（Git hooks）的工具
 > - 特点:
 >   - 提供了丰富的配置选项和灵活性，可以精细地控制 Git 钩子的行为。
 >   - 支持在不同的 Git 钩子事件上运行自定义脚本。
->   - 可以与其他工具（如linters、测试框架等）集成，实现更复杂的工作流。
+>   - 可以与其他工具（如 linters、测试框架等）集成，实现更复杂的工作流。
 >   - 使用场景: 适用于需要灵活配置和管理 Git 钩子的项目，尤其是大型或复杂的项目。
 
 ```json
 // package.json
 {
-  "simple-git-hooks": {
-    // 对暂存区执行 eslint --fix
-    "pre-commit": "pnpm lint-staged",
-    // 对提交信息进行校验
-    "commit-msg": "npx --no-install commitlint --edit $1"
-  },
+	"simple-git-hooks": {
+		// 对暂存区执行 eslint --fix
+		"pre-commit": "pnpm lint-staged",
+		// 对提交信息进行校验
+		"commit-msg": "npx --no-install commitlint --edit $1"
+	},
 
-  "lint-staged": {
-    "*": "eslint --fix"
-  }
+	"lint-staged": {
+		"*": "eslint --fix"
+	}
 }
 ```
 
